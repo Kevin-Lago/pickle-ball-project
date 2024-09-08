@@ -3,7 +3,6 @@ package com.kevinthelago.pickle_ball.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,9 +22,6 @@ public class SecurityConfig {
 //                        .requestMatchers(HttpMethod.DELETE).authenticated()
                         .anyRequest().permitAll()
                 ).csrf(AbstractHttpConfigurer::disable);
-//        http.requiresChannel()
-//                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
-//                .requiresSecure();
         return http.build();
     }
 
