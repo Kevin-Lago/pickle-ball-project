@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  config:
+    activate:
+      on-profile: test
+  application:
+    name: pickle-ball_test
+  datasource:
+    url: jdbc:mysql://localhost:3306/pickle_ball_test?useSSL=false&createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver

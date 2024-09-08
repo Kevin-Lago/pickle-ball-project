@@ -1,13 +1,38 @@
+spring:
+  profiles:
+    active: dev
+---
 server:
   port: 8080
 spring:
-#  config:
-#    activate:
-#      on-profile: dev
+  config:
+    activate:
+      on-profile: dev
   application:
     name: pickle-ball_dev
   datasource:
     url: jdbc:mysql://localhost:3306/pickle_ball_dev?useSSL=false&createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    show_sql: true
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQLDialect
+      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+---
+server:
+  port: 8080
+spring:
+  config:
+    activate:
+      on-profile: prod
+  application:
+    name: pickle-ball_dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/pickle_ball?useSSL=false&createDatabaseIfNotExist=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver

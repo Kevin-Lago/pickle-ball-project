@@ -24,11 +24,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(EventController.class)
 @ActiveProfiles(value = "test")
-@AutoConfigureMockMvc(addFilters = false)
-public class EventControllerTests {
+public class EventControllerSecureTests {
     @Autowired
     private EventController controller;
-
     @Autowired
     private MockMvc mockMvc;
     @MockBean
@@ -89,11 +87,11 @@ public class EventControllerTests {
 
     public static Event createTestEvent() {
         return new Event(
-            UUID.randomUUID(),
-            "",
-            "",
-            new Date(),
-            new Date()
+                UUID.randomUUID(),
+                "",
+                "",
+                new Date(),
+                new Date()
         );
     }
 
