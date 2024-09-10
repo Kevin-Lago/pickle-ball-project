@@ -1,19 +1,26 @@
 package com.kevinthelago.pickle_ball.dao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
 @Entity
 public class Court {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
     private int number;
     @ManyToOne
     private Location location;
+
+    public Court() {
+    }
+
+    public Court(UUID uuid, int number, Location location) {
+        this.uuid = uuid;
+        this.number = number;
+        this.location = location;
+    }
 
     public UUID getUuid() {
         return uuid;

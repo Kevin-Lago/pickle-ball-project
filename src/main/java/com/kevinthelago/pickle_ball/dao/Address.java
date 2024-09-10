@@ -1,8 +1,6 @@
 package com.kevinthelago.pickle_ball.dao;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -10,6 +8,7 @@ import java.util.UUID;
 @Table(name = "address")
 public class Address {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
     private String street1;
     private String street2;

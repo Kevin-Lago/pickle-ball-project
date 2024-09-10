@@ -24,22 +24,44 @@ public class CourtController {
 
     @PostMapping
     public ResponseEntity<Court> createCourt(@RequestBody Court court) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(courtService.createCourt(court));
+        return ResponseEntity.status(HttpStatus.CREATED).body(courtService.create(court));
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<List<Court>> createCourt(@RequestBody List<Court> courts) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(courtService.create(courts));
     }
 
     @GetMapping
     public ResponseEntity<List<Court>> getAllCourts() {
-        return ResponseEntity.ok().body(courtService.getAllCourts());
+        return ResponseEntity.ok().body(courtService.get());
     }
 
     @GetMapping("/{location}")
     public ResponseEntity<List<Court>> getAllCourtsByLocation(@PathVariable("location") UUID uuid) {
-        return ResponseEntity.ok().body(courtService.getCourtsByLocation(uuid));
+        return ResponseEntity.ok().body(courtService.getByLocation(uuid));
     }
 
     @PutMapping
     public ResponseEntity<Court> updateCourt(@RequestBody Court court) {
-        return ResponseEntity.ok().body(courtService.updateCourt(court));
+        return ResponseEntity.ok().body(courtService.update(court));
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<List<Court>> update(@RequestBody List<Court> courts) {
+        return ResponseEntity.ok().body(courtService.update(courts));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestParam("uuid") UUID uuid) {
+        courtService.delete(uuid);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<?> delete(@RequestParam("uuids") List<UUID> uuid) {
+        courtService.delete(uuid);
+        return ResponseEntity.ok().build();
     }
 
     @ExceptionHandler(CourtNotFoundException.class)

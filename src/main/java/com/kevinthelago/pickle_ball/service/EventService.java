@@ -20,23 +20,53 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public Event createEvent(Event event) {
+    public Event create(Event event) {
         return eventRepository.save(event);
     }
 
-    public List<Event> createEvents(List<Event> events) {
-        return events.stream().map(this::createEvent).collect(Collectors.toList());
+    public List<Event> create(List<Event> events) {
+        return eventRepository.saveAll(events);
     }
 
-    public List<Event> getAllEvents() {
+    public List<Event> get() {
         return eventRepository.findAll();
     }
 
-    public Event getEvent(UUID uuid) {
+    public Event get(UUID uuid) {
         Optional<Event> eventOptional = eventRepository.findById(uuid);
 
         if (eventOptional.isEmpty()) throw new EventNotFoundException("Event not found with uuid: " + uuid);
 
         return eventOptional.get();
+    }
+
+    public Event update(Event event) {
+        Optional<Event> eventOptional = eventRepository.findById(event.getUuid());
+
+        if (eventOptional.isEmpty()) throw new EventNotFoundException("Event not found with uuid: " + event.getUuid());
+
+        return eventOptional.get();
+    }
+
+    public List<Event> update(List<Event> events) {
+        return events.stream().map(event -> {
+            try {
+                return update(event);
+            } catch (EventNotFoundException e) {
+                return null;
+            }
+        }).collect(Collectors.toList());
+    }
+
+    public void delete(UUID uuid) {
+        Optional<Event> eventOptional = eventRepository.findById(uuid);
+
+        if (eventOptional.isEmpty()) throw new EventNotFoundException("Event not found with uuid: " + uuid);
+
+        eventRepository.deleteById(uuid);
+    }
+
+    public void delete(List<UUID> uuids) {
+        eventRepository.deleteAllById(uuids);
     }
 }

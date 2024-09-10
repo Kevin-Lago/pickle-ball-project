@@ -9,6 +9,7 @@ import java.util.UUID;
 @Table(name = "event")
 public class Event {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
     private String title;
     private String description;

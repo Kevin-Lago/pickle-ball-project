@@ -23,22 +23,44 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventService.createEvent(event));
+        return ResponseEntity.status(HttpStatus.CREATED).body(eventService.create(event));
     }
 
     @PostMapping("/")
     public ResponseEntity<List<Event>> createEvents(@RequestBody List<Event> events) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventService.createEvents(events));
+        return ResponseEntity.status(HttpStatus.CREATED).body(eventService.create(events));
     }
 
     @GetMapping
     public ResponseEntity<List<Event>> getAllEvents() {
-        return ResponseEntity.ok().body(eventService.getAllEvents());
+        return ResponseEntity.ok().body(eventService.get());
     }
 
     @GetMapping("/{uuid}")
     public ResponseEntity<Event> getEvent(@PathVariable("uuid") UUID uuid) {
-        return ResponseEntity.ok().body(eventService.getEvent(uuid));
+        return ResponseEntity.ok().body(eventService.get(uuid));
+    }
+
+    @PutMapping
+    public ResponseEntity<Event> updateEvent(@RequestBody Event event) {
+        return ResponseEntity.status(HttpStatus.OK).body(eventService.create(event));
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<List<Event>> updateEvents(@RequestBody List<Event> events) {
+        return ResponseEntity.status(HttpStatus.OK).body(eventService.create(events));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Event> deleteEvent(@RequestParam("uuid") UUID uuid) {
+        eventService.delete(uuid);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<List<Event>> deleteEvents(@RequestParam("uuids") UUID uuids) {
+        eventService.delete(uuids);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @ExceptionHandler(EventNotFoundException.class)
