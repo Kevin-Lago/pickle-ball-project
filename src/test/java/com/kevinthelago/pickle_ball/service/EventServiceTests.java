@@ -1,2 +1,4 @@
-package com.kevinthelago.pickle_ball.service;public class EventServiceTests {
+package com.kevinthelago.pickle_ball.service;
+
+public class EventServiceTests {
 }

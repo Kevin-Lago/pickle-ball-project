@@ -1,2 +1,7 @@
-package com.kevinthelago.pickle_ball.service;public class CourtServiceTests {
+package com.kevinthelago.pickle_ball.service;
+
+import org.junit.runner.RunWith;
+
+@RunWith()
+public class CourtServiceTests {
 }

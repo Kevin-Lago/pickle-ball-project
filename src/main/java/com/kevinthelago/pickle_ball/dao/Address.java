@@ -1,5 +1,7 @@
 package com.kevinthelago.pickle_ball.dao;
 
+import com.kevinthelago.pickle_ball.constants.iso_codes.CountryCodes;
+import com.kevinthelago.pickle_ball.constants.iso_codes.IStateCodes;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -14,8 +16,9 @@ public class Address {
     private String street2;
     private String street3;
     private String city;
-    private String state;
-    private String country;
+    @ElementCollection
+    private IStateCodes state;
+    private CountryCodes country;
     private String zipCode;
 
     public UUID getUuid() {
@@ -58,19 +61,19 @@ public class Address {
         this.city = city;
     }
 
-    public String getState() {
+    public IStateCodes getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(IStateCodes state) {
         this.state = state;
     }
 
-    public String getCountry() {
+    public CountryCodes getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(CountryCodes country) {
         this.country = country;
     }
 
