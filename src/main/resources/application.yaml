@@ -11,7 +11,7 @@ spring:
   application:
     name: pickle-ball_dev
   datasource:
-    url: jdbc:mysql://localhost:3306/pickle_ball_dev?useSSL=false&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/pickle_ball_dev?createDatabaseIfNotExist=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
